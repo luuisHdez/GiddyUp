@@ -8,6 +8,11 @@ import Button from './MissionVission/Button';
 import GoalsSection from './Carrusel/GoalsSection';
 import FeedbackSection from './FeedbackSection';
 import GreetPlanning from './GreetPlanning';
+import ProjectPlanning from './ProjectPlanning';
+import CombinedSupportCard from './CombinedSupportCard';
+import CombinedThankYouPage from './CombinedThankYouPage';
+import CombinedContactSection from './CombinedContactSection';
+import CombinedContainer from './CombinedContainer';
 
 function GiddyUpApp() {
   return (
@@ -16,17 +21,21 @@ function GiddyUpApp() {
   <Header />
   <MainContent />
   <ActionButtons />
-  <div className="flex relative z-10 flex-col mt-20 gap-2.5 justify-center items-center self-center py-72 mt-0 ml-0 max-w-[1109px] min-h-[726px] px-[607px] rounded-[30px] max-md:px-5 max-md:py-24 max-md:mt-0">
+  <div className="flex relative z-10 flex-col mt-20 gap-2.5 justify-center items-center self-center py-72 mt-0 ml-0 max-w-[1109px] min-h-[726px] px-[607px] rounded-[30px] max-md:px-5 max-md:py-24 max-md:mt-0 w-full">
     <CenteredImage
       src="https://cdn.builder.io/api/v1/image/assets/TEMP/8ba1dfcc2b7e666fbb58dc84bae4e016df1c2e59c2f7f244cc7a7a4974d7b1ea?apiKey=c1946530cef5422ab7dda9568063bfde&&apiKey=c1946530cef5422ab7dda9568063bfde"
       overlay={true}
     />
-  </div>
+  </div >
     <MissionVisionComponent />
     <Button />
     <GoalsSection />
     <FeedbackSection />
     <GreetPlanning />
+    <ProjectPlanning />
+    <CombinedSupportCard />
+    <CombinedThankYouPage />
+    <CombinedContactSection />
 </div>
     
   );
