@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import surveyData from "./surveyData"; // Asegurarse de que el JSON esté correctamente importado
+import { getLambda } from "../lambda-api"; 
 
 function CombinedContainer() {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
@@ -48,10 +49,17 @@ function CombinedContainer() {
     }
   };
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     console.log("Respuestas:", answers);
     alert("Encuesta finalizada. ¡Gracias por participar!");
-    // Aquí podrías agregar la lógica para enviar los datos
+    
+    // Llamada al API
+    try {
+      const response = await getLambda(); // Llamada al API usando axios
+      console.log("Respuesta de Lambda:", response);
+    } catch (error) {
+      console.error("Error al llamar a la API:", error);
+    }
   };
 
   return (
