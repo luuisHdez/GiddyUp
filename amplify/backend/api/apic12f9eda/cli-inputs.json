@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/prueba": {
+      "name": "/prueba",
+      "lambdaFunction": "giddyupe2fda4e7",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

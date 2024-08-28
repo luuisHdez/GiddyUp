@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const lambdaapi = axios.create({
-    baseURL: 'https://tyksjoc574.execute-api.us-east-1.amazonaws.com/dev'
+    baseURL: 'https://ollffxgxwd.execute-api.us-east-1.amazonaws.com/dev'
 })
 
 export const getLambda = () => {

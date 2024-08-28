@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-giddyup-dev-e2260-authRole",
+      "UnauthRoleArn": "arn:aws:iam::211125723129:role/amplify-giddyup-dev-e2260-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::211125723129:role/amplify-giddyup-dev-e2260-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-giddyup-dev-e2260-deployment",
+      "UnauthRoleName": "amplify-giddyup-dev-e2260-unauthRole",
+      "StackName": "amplify-giddyup-dev-e2260",
+      "StackId": "arn:aws:cloudformation:us-east-1:211125723129:stack/amplify-giddyup-dev-e2260/f3b37400-6583-11ef-965c-0ece5c284e67",
+      "AmplifyAppId": "d6lxz6ufu9nw"
+    },
+    "categories": {
+      "function": {
+        "giddyupe2fda4e7": {
+          "deploymentBucketName": "amplify-giddyup-dev-e2260-deployment",
+          "s3Key": "amplify-builds/giddyupe2fda4e7-4169766162504945434a-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d6lxz6ufu9nw",
+          "type": "cicd"
+        }
+      },
+      "api": {
+        "apic12f9eda": {}
+      }
+    }
+  }
+}
