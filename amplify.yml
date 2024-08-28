@@ -5,7 +5,8 @@ frontend:
       commands:        
         - npm ci 
     build:
-      commands:        
+      commands:  
+        - npm install --save      
         - npm run build  
   artifacts:    
     baseDirectory: dist    
