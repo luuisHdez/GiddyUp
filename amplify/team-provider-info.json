@@ -17,6 +17,15 @@
           "appId": "d39gq1x9xvz440",
           "type": "cicd"
         }
+      },
+      "function": {
+        "giddyupe48810e4": {
+          "deploymentBucketName": "amplify-giddyup-dev-a393a-deployment",
+          "s3Key": "amplify-builds/giddyupe48810e4-4d6f66315a2b4f497568-build.zip"
+        }
+      },
+      "api": {
+        "dev": {}
       }
     }
   }

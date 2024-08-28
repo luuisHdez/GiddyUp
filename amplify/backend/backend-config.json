@@ -1,6 +1,28 @@
 {
-  "api": {},
-  "function": {},
+  "api": {
+    "dev": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "giddyupe48810e4"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "giddyupe48810e4": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "hosting": {
     "amplifyhosting": {
       "lastPushTimeStamp": "2024-08-28T01:02:40.363Z",
@@ -9,6 +31,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_giddyupe48810e4_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "giddyupe48810e4"
+        }
+      ]
+    },
+    "AMPLIFY_function_giddyupe48810e4_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "giddyupe48810e4"
+        }
+      ]
+    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {
