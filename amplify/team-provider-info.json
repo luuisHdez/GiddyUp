@@ -21,7 +21,7 @@
       "function": {
         "firstlambda": {
           "deploymentBucketName": "amplify-giddyup-dev-a393a-deployment",
-          "s3Key": "amplify-builds/firstlambda-36484667543451387264-build.zip"
+          "s3Key": "amplify-builds/firstlambda-376d734c416e3748736d-build.zip"
         }
       },
       "api": {
