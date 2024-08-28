@@ -4,8 +4,6 @@ frontend:
     preBuild:      
       commands:        
         - npm ci
-        - pip3 install --user pipenv virtualenv
-        - pipenv install
     build:
       commands:  
         - npm install --save      
