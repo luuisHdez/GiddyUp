@@ -17,15 +17,6 @@
           "appId": "d39gq1x9xvz440",
           "type": "cicd"
         }
-      },
-      "function": {
-        "firstlambda": {
-          "deploymentBucketName": "amplify-giddyup-dev-a393a-deployment",
-          "s3Key": "amplify-builds/firstlambda-376d734c416e3748736d-build.zip"
-        }
-      },
-      "api": {
-        "giddyApi": {}
       }
     }
   }

@@ -1,28 +1,6 @@
 {
-  "api": {
-    "giddyApi": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "firstlambda"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    }
-  },
-  "function": {
-    "firstlambda": {
-      "build": true,
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
+  "api": {},
+  "function": {},
   "hosting": {
     "amplifyhosting": {
       "lastPushTimeStamp": "2024-08-28T01:02:40.363Z",
@@ -31,22 +9,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_firstlambda_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "firstlambda"
-        }
-      ]
-    },
-    "AMPLIFY_function_firstlambda_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "firstlambda"
-        }
-      ]
-    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {
