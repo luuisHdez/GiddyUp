@@ -6,7 +6,7 @@ const lambdaapi = axios.create({
 })
 
 export const getLambda = () => {
-    return lambdaapi.get('/items')
+    return lambdaapi.get('/prueba')
     .then(response => response.data)
     .catch(error => {
         console.error("error", error);
