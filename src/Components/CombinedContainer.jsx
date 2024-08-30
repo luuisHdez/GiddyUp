@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import surveyData from "./surveyData"; // Asegurarse de que el JSON esté correctamente importado
-import { getLambda } from "../lambda-api"; 
+import React, { useState, useEffect } from "react";
+import surveyData from "./surveyData"; // Asegúrate de que el JSON esté correctamente importado
+import { getLambda } from "../lambda-api";
 
-function CombinedContainer() {
+function CombinedContainer({ closeModal }) {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState(() => {
+    // Cargar respuestas guardadas en localStorage al iniciar
+    const savedAnswers = localStorage.getItem("surveyAnswers");
+    return savedAnswers ? JSON.parse(savedAnswers) : {};
+  });
+
+  // Guardar las respuestas en localStorage cada vez que se actualicen
+  useEffect(() => {
+    localStorage.setItem("surveyAnswers", JSON.stringify(answers));
+  }, [answers]);
 
   // Verificar que surveyData tenga la estructura correcta
   if (!surveyData || !surveyData[0]?.pages) {
@@ -14,52 +23,83 @@ function CombinedContainer() {
   const currentPage = surveyData[0].pages[currentPageIndex];
 
   const handleOptionChange = (questionName, value) => {
-    setAnswers({
-      ...answers,
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
       [questionName]: value,
-    });
+    }));
   };
 
   const handleCheckboxChange = (questionName, value) => {
-    const currentValues = answers[questionName] || [];
-    if (currentValues.includes(value)) {
-      // Remover el valor si ya está seleccionado
-      setAnswers({
-        ...answers,
-        [questionName]: currentValues.filter((v) => v !== value),
-      });
-    } else {
-      // Agregar el valor si no está seleccionado
-      setAnswers({
-        ...answers,
-        [questionName]: [...currentValues, value],
-      });
-    }
+    setAnswers((prevAnswers) => {
+      const currentValues = prevAnswers[questionName] || [];
+      return {
+        ...prevAnswers,
+        [questionName]: currentValues.includes(value)
+          ? currentValues.filter((v) => v !== value)
+          : [...currentValues, value],
+      };
+    });
+  };
+
+  const validatePage = () => {
+    // Validar que todas las preguntas en la página actual hayan sido respondidas
+    const unansweredQuestions = currentPage.elements.filter((element) => {
+      if (element.type === "radiogroup" || element.type === "text" || element.type === "comment") {
+        return !answers[element.name];
+      } else if (element.type === "checkbox") {
+        return !answers[element.name] || answers[element.name].length === 0;
+      }
+      return false;
+    });
+
+    return unansweredQuestions.length === 0;
   };
 
   const handleNextPage = () => {
-    if (currentPageIndex < surveyData[0].pages.length - 1) {
-      setCurrentPageIndex(currentPageIndex + 1);
+    if (validatePage()) {
+      setCurrentPageIndex((prevIndex) =>
+        prevIndex < surveyData[0].pages.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    } else {
+      alert("Por favor, responde todas las preguntas antes de continuar.");
     }
   };
 
   const handlePreviousPage = () => {
-    if (currentPageIndex > 0) {
-      setCurrentPageIndex(currentPageIndex - 1);
-    }
+    setCurrentPageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
   };
 
   const handleFinish = async () => {
-    console.log("Respuestas:", answers);
-    alert("Encuesta finalizada. ¡Gracias por participar!");
-    
-    // Llamada al API
-    try {
-      const response = await getLambda(); // Llamada al API usando axios
-      console.log("Respuesta de Lambda:", response);
-    } catch (error) {
-      console.error("Error al llamar a la API:", error);
+    if (!validatePage()) {
+        alert("Por favor, responde todas las preguntas antes de finalizar.");
+        return;
     }
+
+    alert("Encuesta finalizada. ¡Gracias por participar!");
+    const savedAnswers = JSON.parse(localStorage.getItem("surveyAnswers"));
+    const answerdJSON = JSON.stringify(savedAnswers);
+    console.log(answerdJSON);
+
+    // Limpiar localStorage después de enviar las respuestas
+    localStorage.removeItem("surveyAnswers");
+
+    // Cerrar el modal de la encuesta
+    if (closeModal) {
+        closeModal();
+    }
+
+    // Llamada al API con el objeto de respuestas
+    try {
+        const response = await getLambda(savedAnswers); // Enviando el objeto de respuestas
+        console.log("Respuesta de Lambda:", response);
+    } catch (error) {
+        console.error("Error al llamar a la API:", error);
+    }
+};
+
+
+  const getInputValue = (name) => {
+    return answers[name] !== undefined ? answers[name] : "";
   };
 
   return (
@@ -121,7 +161,7 @@ function CombinedContainer() {
             <input
               type="text"
               name={element.name}
-              value={answers[element.name] || ""}
+              value={getInputValue(element.name)}
               onChange={(e) => handleOptionChange(element.name, e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
               placeholder="Escribe tu respuesta aquí"
@@ -132,7 +172,7 @@ function CombinedContainer() {
           {element.type === "comment" && (
             <textarea
               name={element.name}
-              value={answers[element.name] || ""}
+              value={getInputValue(element.name)}
               onChange={(e) => handleOptionChange(element.name, e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
               placeholder="Escribe tu comentario aquí"

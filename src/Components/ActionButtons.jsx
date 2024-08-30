@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import CombinedContainer from "./CombinedContainer";
+
 function ActionButtons() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -37,17 +37,17 @@ function ActionButtons() {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 p-4">
-        <div className="bg-white p-6 rounded-lg max-w-full w-[800px] max-h-[90%] overflow-auto shadow-lg md:max-w-[70%] lg:max-w-[50%]">
-          <button
-            onClick={toggleModal}
-            className="absolute top-4 right-4 text-2xl"
-          >
-            &times;
-          </button>
-          {/* Aquí se inserta el componente del formulario */}
-          <CombinedContainer />
+          <div className="bg-white p-6 rounded-lg max-w-full w-[800px] max-h-[90%] overflow-auto shadow-lg md:max-w-[70%] lg:max-w-[50%]">
+            <button
+              onClick={toggleModal}
+              className="absolute top-4 right-4 text-2xl"
+            >
+              &times;
+            </button>
+            {/* Aquí se inserta el componente del formulario */}
+            <CombinedContainer closeModal={toggleModal} />
+          </div>
         </div>
-      </div>
       )}
     </div>
   );

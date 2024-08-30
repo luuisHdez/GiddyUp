@@ -3,6 +3,26 @@ const surveyData = [
         "title": "Cuestionario ¡Arreando!",
         "pages": [
           {
+            "name": "informacion_personal",
+            "elements": [
+              {
+                "type": "comment",
+                "name": "correo_electronico",
+                "title": "¿Cuál es tu correo electrónico?"
+              },
+              {
+                "type": "comment",
+                "name": "nombre",
+                "title": "¿Cuál es tu nombre?"
+              },
+              {
+                "type": "comment",
+                "name": "celular",
+                "title": "¿Cuál es tu número de celular?"
+              }
+            ]
+          },
+          {
             "name": "informacion_demografica",
             "elements": [
               {
