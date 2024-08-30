@@ -7,13 +7,13 @@ const surveyData = [
             "elements": [
               {
                 "type": "comment",
-                "name": "correo_electronico",
-                "title": "¿Cuál es tu correo electrónico?"
+                "name": "nombre",
+                "title": "¿Cuál es tu nombre?"
               },
               {
                 "type": "comment",
-                "name": "nombre",
-                "title": "¿Cuál es tu nombre?"
+                "name": "correo_electronico",
+                "title": "¿Cuál es tu correo electrónico?"
               },
               {
                 "type": "comment",

@@ -1,5 +1,6 @@
 import json
 import boto3
+import uuid
 import os
 
 # Crear un cliente de DynamoDB
@@ -11,10 +12,10 @@ def handler(event, context):
     try:
         # Parsear el cuerpo de la solicitud
         body = json.loads(event['body'])
-        id_encuesta = body.get('id_encuesta')
+        correo_electronico = body.get('correo_electronico')
 
-        # Validar que 'id_encuesta' esté presente
-        if not id_encuesta:
+        # Validar que 'correo_electronico' esté presente
+        if not correo_electronico:
             return {
                 'statusCode': 400,
                 'headers': {
@@ -22,12 +23,14 @@ def handler(event, context):
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
                 },
-                'body': json.dumps('Falta el dato: id_encuesta es requerido.')
+                'body': json.dumps('Falta el dato: correo_electronico es requerido.')
             }
+        # Generar un ID único usando UUID v4
+        id_encuesta = str(uuid.uuid4())
 
         # Crear el objeto que se insertará en DynamoDB
         item = {
-            'id_encuesta': 1,
+            'id_encuesta': id_encuesta,
             'correo_electronico': body.get('correo_electronico'),
             'nombre': body.get('nombre'),
             'celular': body.get('celular'),

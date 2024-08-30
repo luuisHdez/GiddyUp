@@ -15,7 +15,7 @@
       "function": {
         "giddyupe2fda4e7": {
           "deploymentBucketName": "amplify-giddyup-dev-e2260-deployment",
-          "s3Key": "amplify-builds/giddyupe2fda4e7-4169766162504945434a-build.zip"
+          "s3Key": "amplify-builds/giddyupe2fda4e7-38494f3158716d574f49-build.zip"
         }
       },
       "hosting": {
