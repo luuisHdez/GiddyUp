@@ -1,80 +1,51 @@
-import json
-import boto3
-import uuid
-import os
+import json, boto3, uuid
 
-# Crear un cliente de DynamoDB
 dynamodb = boto3.resource('dynamodb')
-table_name = 'encuesta'
-table = dynamodb.Table(table_name)
+table = dynamodb.Table('encuesta')
 
 def handler(event, context):
-    try:
-        # Parsear el cuerpo de la solicitud
-        body = json.loads(event['body'])
-        correo_electronico = body.get('correo_electronico')
+    method = event['httpMethod']
+    return handle_post(event) if method == 'POST' else handle_get() if method == 'GET' else response(405, 'Método no permitido.')
 
-        # Validar que 'correo_electronico' esté presente
-        if not correo_electronico:
-            return {
-                'statusCode': 400,
-                'headers': {
-                    'Access-Control-Allow-Headers': '*',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-                },
-                'body': json.dumps('Falta el dato: correo_electronico es requerido.')
-            }
-        # Generar un ID único usando UUID v4
-        id_encuesta = str(uuid.uuid4())
+def handle_post(event):
+    body = json.loads(event['body'])
+    
+    # Obtener el correo electrónico usando 'q2' como identificador
+    correo_electronico = body.get('q2', {}).get('answer')
+    
+    if not correo_electronico:
+        return response(400, 'Falta el dato: correo_electronico es requerido.')
+    
+    # Crear el objeto para insertar en DynamoDB usando los 'id' como claves
+    item = {
+        key: {
+            'answer': value.get('answer', ''),
+            'text': value.get('text', ''),
+            'title': value.get('title', ''),
+            'type': value.get('type', '')
+        } for key, value in body.items()
+    }
+    
+    # Generar un ID único para la encuesta
+    item['id_encuesta'] = str(uuid.uuid4())
+    
+    # Insertar el objeto en DynamoDB
+    table.put_item(Item=item)
+    
+    return response(200, 'Elemento insertado correctamente.')
 
-        # Crear el objeto que se insertará en DynamoDB
-        item = {
-            'id_encuesta': id_encuesta,
-            'correo_electronico': body.get('correo_electronico'),
-            'nombre': body.get('nombre'),
-            'celular': body.get('celular'),
-            'edad': body.get('edad'),
-            'genero': body.get('genero'),
-            'pais_residencia': body.get('pais_residencia'),
-            'ocupacion': body.get('ocupacion'),
-            'uso_aplicaciones_separadas': body.get('uso_aplicaciones_separadas'),
-            'tipos_aplicaciones': body.get('tipos_aplicaciones'),
-            'horas_aplicaciones_moviles': body.get('horas_aplicaciones_moviles'),
-            'caracteristicas_interesantes': body.get('caracteristicas_interesantes'),
-            'caracteristicas_innecesarias': body.get('caracteristicas_innecesarias'),
-            'atractivo_concepto': body.get('atractivo_concepto'),
-            'incomodidad_cambiar_aplicaciones': body.get('incomodidad_cambiar_aplicaciones'),
-            'integracion_aplicacion': body.get('integracion_aplicacion'),
-            'importancia_multiservicio': body.get('importancia_multiservicio'),
-            'suscripcion_premium': body.get('suscripcion_premium'),
-            'opinion_monetizacion': body.get('opinion_monetizacion'),
-            'contenido_localizado': body.get('contenido_localizado'),
-            'atractivo_futuras_caracteristicas': body.get('atractivo_futuras_caracteristicas'),
-            'comentarios_adicionales': body.get('comentarios_adicionales'),
-            'probabilidad_uso_aplicacion': body.get('probabilidad_uso_aplicacion')
-        }
 
-        # Insertar el objeto en DynamoDB
-        table.put_item(Item=item)
+def handle_get():
+    items = table.scan().get('Items', [])
+    return response(200, items)
 
-        return {
-            'statusCode': 200,
-            'headers': {
-                'Access-Control-Allow-Headers': '*',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-            },
-            'body': json.dumps('Elemento insertado correctamente.')
-        }
-
-    except Exception as e:
-        return {
-            'statusCode': 500,
-            'headers': {
-                'Access-Control-Allow-Headers': '*',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-            },
-            'body': json.dumps(f'Error al insertar el elemento: {str(e)}')
-        }
+def response(status, body):
+    return {
+        'statusCode': status,
+        'headers': {
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+        },
+        'body': json.dumps(body)
+    }

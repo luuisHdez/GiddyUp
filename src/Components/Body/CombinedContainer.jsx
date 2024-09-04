@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import surveyData from "./surveyData"; // Asegúrate de que el JSON esté correctamente importado
-import { getLambda } from "../lambda-api";
+import surveyData from "../surveyData"; // Asegúrate de que el JSON esté correctamente importado
+import { getLambda } from "../../lambda-api";
 
 function CombinedContainer({ closeModal }) {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
@@ -41,9 +41,17 @@ function CombinedContainer({ closeModal }) {
     });
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const validatePage = () => {
-    // Validar que todas las preguntas en la página actual hayan sido respondidas
     const unansweredQuestions = currentPage.elements.filter((element) => {
+      if (element.name === "correo_electronico" && !validateEmail(answers[element.name])) {
+        alert(`Por favor, ingresa una dirección de correo válida.`);
+        return true;
+      }
       if (element.type === "radiogroup" || element.type === "text" || element.type === "comment") {
         return !answers[element.name];
       } else if (element.type === "checkbox") {
@@ -71,32 +79,48 @@ function CombinedContainer({ closeModal }) {
 
   const handleFinish = async () => {
     if (!validatePage()) {
-        alert("Por favor, responde todas las preguntas antes de finalizar.");
-        return;
+      alert("Por favor, responde todas las preguntas antes de finalizar.");
+      return;
     }
-
-    alert("Encuesta finalizada. ¡Gracias por participar!");
-    const savedAnswers = JSON.parse(localStorage.getItem("surveyAnswers"));
-    const answerdJSON = JSON.stringify(savedAnswers);
-    console.log(answerdJSON);
-
-    // Limpiar localStorage después de enviar las respuestas
-    localStorage.removeItem("surveyAnswers");
-
-    // Cerrar el modal de la encuesta
-    if (closeModal) {
-        closeModal();
-    }
-
-    // Llamada al API con el objeto de respuestas
+  
+    // Crear el objeto dataToSend con el id como clave
+    const dataToSend = Object.keys(answers).reduce((acc, key) => {
+      const question = surveyData[0].pages
+        .flatMap((page) => page.elements)
+        .find((element) => element.name === key);
+      
+      const selectedText = question?.choices?.find((choice) => choice.value === answers[key])?.text;
+      
+      if (question?.id) {
+        acc[question.id] = {
+          answer: answers[key],
+          text: selectedText || answers[key],
+          type: question.type, // Agregando el tipo de pregunta
+          title: question.title, // Usando "title" en lugar de "name"
+        };
+      }
+      
+      return acc;
+    }, {});
+  
+    console.log("resss",dataToSend);
+  
     try {
-        const response = await getLambda(savedAnswers); // Enviando el objeto de respuestas
-        console.log("Respuesta de Lambda:", response);
+      const response = await getLambda(dataToSend);
+      console.log("Respuesta de Lambda:", response);
     } catch (error) {
-        console.error("Error al llamar a la API:", error);
+      console.error("Error al llamar a la API:", error);
     }
-};
-
+  
+    //localStorage.removeItem("surveyAnswers");
+  
+    if (closeModal) {
+      closeModal();
+    }
+  
+    alert("Encuesta finalizada. ¡Gracias por participar!");
+  };
+  
 
   const getInputValue = (name) => {
     return answers[name] !== undefined ? answers[name] : "";
@@ -124,28 +148,6 @@ function CombinedContainer({ closeModal }) {
                     value={choice.value}
                     checked={answers[element.name] === choice.value}
                     onChange={() => handleOptionChange(element.name, choice.value)}
-                    className="mr-2"
-                  />
-                  <label htmlFor={`question-${element.name}-choice-${index}`}>
-                    {choice.text}
-                  </label>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Checkbox */}
-          {element.type === "checkbox" && (
-            <div className="space-y-1">
-              {element.choices.map((choice, index) => (
-                <div key={index} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id={`question-${element.name}-choice-${index}`}
-                    name={element.name}
-                    value={choice.value}
-                    checked={answers[element.name]?.includes(choice.value)}
-                    onChange={() => handleCheckboxChange(element.name, choice.value)}
                     className="mr-2"
                   />
                   <label htmlFor={`question-${element.name}-choice-${index}`}>

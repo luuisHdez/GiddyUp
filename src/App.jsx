@@ -1,19 +1,22 @@
-import { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GiddyUpApp from './Components/GiddyUpApp'
+import Charts from './Components/admin/charts'
+import Survey from './Components/admin/survey';
 import './App.css'
-import CombinedFooter from './Components/CombinedFooter'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <GiddyUpApp />
-        <CombinedFooter />
-      </div>        
-    </>
-  )
+    <Router>
+    <div>
+      <Routes>
+        <Route path="/" element={<GiddyUpApp />} />
+        <Route path="/charts" element={<Charts />} />
+        <Route path="/survey" element={<Survey />} />
+      </Routes>
+    </div>
+  </Router>
+);
 }
 
 export default App

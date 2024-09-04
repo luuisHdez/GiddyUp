@@ -1,22 +1,23 @@
 import React from 'react';
-import Header from './Header';
-import MainContent from './MainContent';
-import ActionButtons from './ActionButtons';
-import CenteredImage from './CenteredImage';
-import MissionVisionComponent from './MissionVission/MissionVisionComponent';
-import Button from './MissionVission/Button';
-import GoalsSection from './Carrusel/GoalsSection';
-import FeedbackSection from './FeedbackSection';
-import GreetPlanning from './GreetPlanning';
-import ProjectPlanning from './ProjectPlanning';
-import CombinedSupportCard from './CombinedSupportCard';
-import CombinedThankYouPage from './CombinedThankYouPage';
-import CombinedContactSection from './CombinedContactSection';
-import CombinedContainer from './CombinedContainer';
+import Header from './Body/Header';
+import MainContent from './Body/MainContent';
+import ActionButtons from './Body/ActionButtons';
+import CenteredImage from './Body/CenteredImage';
+import MissionVisionComponent from './Body/MissionVisionComponent';
+import Button from './Body/Button';
+import GoalsSection from './Body/GoalsSection';
+import FeedbackSection from './Body/FeedbackSection';
+import GreetPlanning from './Body/GreetPlanning';
+import ProjectPlanning from './Body/ProjectPlanning';
+import CombinedSupportCard from './Body/CombinedSupportCard';
+import CombinedThankYouPage from './Body/CombinedThankYouPage';
+import CombinedContactSection from './Body/CombinedContactSection';
+import CombinedFooter from './Body/CombinedFooter';
 
 function GiddyUpApp() {
   return (
-    <div className="flex  flex-col items-center px-20 pt-10 pb-80 w-full max-w-[2028px] min-h-[1010px] max-md:px-5 max-md:pb-24 max-md:max-w-full">
+    <div>
+      <div className="flex  flex-col items-center px-20 pt-10 mb-4 w-full max-w-[2028px] min-h-[1010px] max-md:px-5 max-md:pb-24 max-md:max-w-full">
   <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/2aae6b7b24cfce92ff03cfe6f5a51e78ae8c99bb684510e5d77b1a488b9cf33f?apiKey=c1946530cef5422ab7dda9568063bfde&&apiKey=c1946530cef5422ab7dda9568063bfde" alt="" className="object-cover absolute inset-0 size-full" />
   <Header />
   <MainContent />
@@ -36,7 +37,11 @@ function GiddyUpApp() {
     <CombinedSupportCard />
     <CombinedThankYouPage />
     <CombinedContactSection />
+    
 </div>
+<CombinedFooter />
+    </div>
+    
     
   );
 }
