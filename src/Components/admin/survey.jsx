@@ -33,8 +33,8 @@ function Survey() {
   const currentSurvey = surveys[currentSurveyIndex] || {};
 
   return (
-    <div className="space-y-6 p-4 max-h-80">
-      <h2 className="text-lg font-semibold text-center">
+    <div className="flex flex-col items-center max-md:max-w-full">
+      <h2 className="mb-2 mt-0 text-2xl font-medium leading-tight text-primary text-center">
         {surveys.length > 0
           ? `Respuestas de la Encuesta ${currentSurveyIndex + 1}`
           : "Componente de Revisión de Encuestas"}

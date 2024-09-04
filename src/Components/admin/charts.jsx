@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { getAllSurveys } from '../../lambda-api';
 import surveyData from '../surveyData';
 import Survey from './survey';
@@ -9,6 +9,16 @@ export default class SurveyCharts extends PureComponent {
     surveyResults: [],
     currentQuestionIndex: 0,
     showChart: false,
+  };
+
+  // Función para generar un color aleatorio en formato hexadecimal
+  getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   };
 
   // Procesar datos del backend para obtener conteo de respuestas por opción
@@ -26,6 +36,7 @@ export default class SurveyCharts extends PureComponent {
                 count + (survey[element.id]?.answer === choice.value ? 1 : 0),
               0
             ),
+            color: this.getRandomColor(), // Asigna un color aleatorio a cada barra
           })),
         }))
     );
@@ -57,10 +68,10 @@ export default class SurveyCharts extends PureComponent {
     const currentQuestion = surveyResults[currentQuestionIndex];
 
     return (
-      <div className="flex  flex-col  px-20 pt-10 pb-80 w-full max-w-[2028px] min-h-[1010px] max-md:px-5 max-md:pb-24 max-md:max-w-full">
-        <h1>Gráfica de Resultados</h1>
+      <div className=" flex flex-col items-center max-md:max-w-full border border-gray-400 p-4 rounded">
+        <h1 className='mb-2 text-2xl font-medium leading-tight text-primary text-center'>Gráfica de Resultados</h1>
         {!showChart && (
-          <button onClick={this.showResults} className="px-4 py-2 bg-gray-300 rounded mb-4">
+          <button onClick={this.showResults} className="px-4 py-2 bg-gray-300 rounded">
             Mostrar Resultados
           </button>
         )}
@@ -74,7 +85,11 @@ export default class SurveyCharts extends PureComponent {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="value" fill="#82ca9d" />
+                <Bar dataKey="value">
+                  {currentQuestion.data.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
             <div className="flex justify-between mt-4">
@@ -95,9 +110,10 @@ export default class SurveyCharts extends PureComponent {
             </div>
           </>
         )}
-        <div>
-          < Survey />
-        </div>
+       <div className='flex flex-col items-center max-md:max-w-full border border-gray-400 p-4 rounded mt-2'>
+          <Survey />
+       </div>
+
       </div>
     );
   }
