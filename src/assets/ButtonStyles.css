@@ -1,0 +1,49 @@
+#fifth.buttonBox {
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    
+}
+
+#fifth.buttonBox:hover {
+    transform: scale(1.1); /* Efecto de zoom en hover */
+    background-color: #fff; /* Cambiar color de fondo */
+}
+
+#fifth.buttonBox:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+}
+
+#fifth.buttonBox:hover:before, 
+#fifth.buttonBox:hover:after {
+    width: 100%;
+}
+
+/* Estilos para aplicar el efecto a cada letra del texto */
+/* Animación para las letras */
+.text-animate span {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    text-align: center;
+  }
+  
+  .text-animate span:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* Asegurar que el texto se mantenga en una sola línea en dispositivos móviles */
+  .text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; /* Evita que se rompa en una nueva línea */
+    gap: 0.5rem; /* Espacio entre las palabras */
+  }
+  
+  .text-container .word {
+    white-space: nowrap; /* Evita que las palabras se dividan en varias líneas */
+  }
+  

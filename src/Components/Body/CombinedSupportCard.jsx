@@ -52,7 +52,7 @@ function CombinedSupportCard() {
                   {supportData[0].description}
                 </p>
               </div>
-              <button className="flex gap-2 justify-center items-center px-6 py-4 mt-20 max-w-full text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
+              <button id="fifth" className="flex gap-2 buttonBox justify-center items-center px-6 py-4 mt-20 max-w-full text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
                 <span className="self-stretch my-auto">{supportData[0].buttonText}</span>
                 <img
                   loading="lazy"
@@ -78,7 +78,7 @@ function CombinedSupportCard() {
                   Help us reach more people by sharing our crowdfunding campaign on your social networks, with friends, family and colleagues. The more people know about our project, the closer we will be to reaching our goal.
                 </p>
               </div>
-              <button className="flex relative gap-2 justify-center items-center px-6 py-4 mt-12 max-w-full text-xl font-medium bg-white min-h-[56px] rounded-[100px] text-neutral-700 w-[219px] max-md:px-5 max-md:mt-10 z-10">
+              <button id="fifth" className="flex relative buttonBox gap-2 justify-center items-center px-6 py-4 mt-12 max-w-full text-xl font-medium bg-white min-h-[56px] rounded-[100px] text-neutral-700 w-[219px] max-md:px-5 max-md:mt-10 z-10">
                 <span className="self-stretch my-auto">INVEST NOW</span>
                 <img
                   loading="lazy"
@@ -102,7 +102,7 @@ function CombinedSupportCard() {
                   {supportData[1].description}
                 </p>
               </div>
-              <button className="flex gap-2 justify-center items-center px-6 py-4 mt-20 max-w-full text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
+              <button id="fifth" className="flex gap-2 buttonBox justify-center items-center px-6 py-4 mt-20 max-w-full text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
                 <span className="self-stretch my-auto">{supportData[1].buttonText}</span>
                 <img
                   loading="lazy"
@@ -124,7 +124,7 @@ function CombinedSupportCard() {
                   {supportData[2].description}
                 </p>
               </div>
-              <button className="flex gap-2 justify-center items-center px-6 py-4 mt-20 max-w-full text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
+              <button id="fifth" className="flex gap-2 buttonBox justify-center items-center px-6 py-4 mt-20 max-w-full text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
                 <span className="self-stretch my-auto">{supportData[2].buttonText}</span>
                 <img
                   loading="lazy"
@@ -137,6 +137,14 @@ function CombinedSupportCard() {
           </div>
         </div>
       </section>
+      <section>
+            <img
+              loading="lazy"
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/d9c80c983ad59895fe9deeef7427a3e76bd15f1d2827c6b26c8bcf83c0fe698d?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde"
+              className="object-contain w-full rounded-none aspect-[2.1] max-md:max-w-full"
+              alt=""
+            />
+          </section>
     </main>
   );
 }

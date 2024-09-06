@@ -20,55 +20,74 @@ const feedbackPoints = [
 
 function FeedbackSection() {
     return (
-        <section className="rounded-[30px] px-4">
-          <div className="flex gap-5 flex-wrap md:flex-nowrap">
-            <div className="flex flex-col w-full md:w-6/12">
-              <img 
-                loading="lazy" 
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/f0942c1f77e15c216c62efb68a78f17c3d1e1b3e650ea1d4a4e7cfe30990f773?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde" 
-                alt="Feedback illustration" 
-                className="object-contain grow w-full rounded-2xl aspect-[1.05] max-md:mt-10"
-              />
-            </div>
-            <div className="flex flex-col ml-0 md:ml-5 w-full md:w-6/12">
-              <div className="flex flex-col self-stretch my-auto max-md:mt-10">
-                <header className="flex flex-col w-full">
-                  <h1 className="text-4xl md:text-6xl font-semibold text-sky-600 capitalize leading-[51px] md:leading-[74px]">
-                    <span className="font-medium">Your opinion is </span>
-                    <br />
-                    <span className="font-medium text-sky-600">important</span>{" "}
-                    <span className="font-medium text-sky-600">to us!</span>
-                  </h1>
-                  <p className="mt-6 md:mt-10 text-base md:text-lg tracking-normal leading-6 md:leading-8 text-neutral-600">
-                    At Giddy Up, we value feedback from our users and visitors. We'd love to hear from you about our app and how we can improve to give you a better experience. We invite you to participate in our questionnaire and share your thoughts and suggestions.
-                  </p>
-                </header>
-                <div className="flex flex-col mt-10 md:mt-20 capitalize w-full">
-                  <h2 className="text-2xl md:text-3xl font-medium text-sky-600">
-                    Your collaboration will{" "}
-                    <span className="text-sky-600">help us</span>:
-                  </h2>
-                  <ul className="flex flex-col mt-6 md:mt-10 w-full text-xl md:text-2xl leading-8 md:leading-10 text-neutral-700">
-                    {feedbackPoints.map((point, index) => (
-                      <li key={index} className="flex flex-wrap gap-3 mt-6 md:mt-9 first:mt-0">
-                        <img 
-                          loading="lazy" 
-                          src={point.icon} 
-                          alt="" 
-                          className="object-contain shrink-0 w-6 md:w-8 aspect-square"
-                        />
-                        <div className="flex-auto underline">
-                          <span className="underline">{point.title}</span>{" "}:{" "}
-                          <span className="font-medium">{point.description}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+      <section className="rounded-[30px] px-4 mt-10">
+      <div className="flex gap-5 flex-wrap md:flex-nowrap">
+        {/* Imagen de la izquierda */}
+        <div className="flex flex-col w-full md:w-6/12">
+          <img 
+            loading="lazy" 
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/f0942c1f77e15c216c62efb68a78f17c3d1e1b3e650ea1d4a4e7cfe30990f773?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde" 
+            alt="Feedback illustration" 
+            className="object-contain grow w-full rounded-2xl aspect-[1.05] max-md:mt-10"
+          />
+        </div>
+    
+        {/* Texto y lista de puntos */}
+        <div className="flex flex-col ml-0 md:ml-5 w-full md:w-6/12">
+          <div className="flex flex-col self-stretch my-auto max-md:mt-10">
+            {/* Encabezado */}
+            <header className="flex flex-col w-full">
+              <h1 className="text-4xl md:text-6xl font-semibold text-sky-600 capitalize leading-[51px] md:leading-[74px]">
+                <span className="font-medium">Your opinion is </span>
+                <br />
+                <span className="font-medium text-sky-600">important</span>{" "}
+                <span className="font-medium text-sky-600">to us!</span>
+              </h1>
+              <p className="mt-6 md:mt-10 text-base md:text-lg tracking-normal leading-6 md:leading-8 text-neutral-600">
+                At Giddy Up, we value feedback from our users and visitors. We'd love to hear from you about our app and how we can improve to give you a better experience. We invite you to participate in our questionnaire and share your thoughts and suggestions.
+              </p>
+            </header>
+    
+            {/* Lista de puntos con íconos */}
+            <div className="flex flex-col mt-10 md:mt-20 capitalize w-full">
+              <h2 className="text-2xl md:text-3xl font-medium text-sky-600">
+                Your collaboration will <span className="text-sky-600">help us</span>:
+              </h2>
+              <ul className="flex flex-col mt-6 md:mt-10 w-full text-xl md:text-2xl leading-8 md:leading-10 text-neutral-700">
+                {feedbackPoints.map((point, index) => (
+                  <li key={index} className="flex gap-4 items-center mt-6 md:mt-9 first:mt-0">
+                    <img 
+                      loading="lazy" 
+                      src={point.icon} 
+                      alt="" 
+                      className="object-contain shrink-0 w-6 md:w-8 aspect-square"
+                    />
+                    <div className="flex-auto">
+                      <span className="underline">{point.title}</span>:{" "}
+                      <span className="font-medium">{point.description}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
+    
+      {/* Sección final con agradecimiento */}
+      <section className="flex flex-col font-medium px-4 max-w-full">
+        <p className="self-end mt-1.5 text-4xl md:text-7xl text-center leading-[56px] md:leading-[85px] text-neutral-600">
+          Thank you for taking the time to help us improve! Your participation is essential to create{" "}
+          <span className="text-stone-300">
+            the best all-in-one application for managing your daily activities.
+          </span>
+        </p>
+        <h2 className="mt-5 md:mt-62 text-4xl md:text-6xl capitalize leading-[54px] md:leading-[78px] text-neutral-700 w-full">
+          Planning and Use of Financing at Giddy Up
+        </h2>
+      </section>
+    </section>
+    
       );
          
 }

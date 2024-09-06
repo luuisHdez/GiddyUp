@@ -10,9 +10,14 @@ function SectionTitle({ children }) {
 
 function ListItem({ title, description }) {
   return (
-    <li className="flex flex-wrap gap-3 mt-7 w-full max-md:max-w-full">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/cd630841b9bc44721b4135362f8b0dcac05453d7fbd8e29fc3a14fffcc61708b?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde" className="object-contain shrink-0 self-start w-8 aspect-square" alt="" />
-      <div className="flex-auto w-[794px] max-md:max-w-full">
+    <li className="flex items-start gap-4 mt-5 w-full max-md:max-w-full">
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/cd630841b9bc44721b4135362f8b0dcac05453d7fbd8e29fc3a14fffcc61708b?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde"
+        className="object-contain shrink-0 w-8 md:w-10 aspect-square"
+        alt=""
+      />
+      <div className="flex-auto">
         <span className="font-medium underline text-neutral-500">{title}</span>
         <span className="font-medium text-neutral-500">:</span>{" "}
         <span className="font-medium">{description}</span>
@@ -23,9 +28,14 @@ function ListItem({ title, description }) {
 
 function InvestButton() {
   return (
-    <button className="flex gap-2 justify-center items-center px-6 py-4 mt-12 max-w-full text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
+    <button id="fifth" className="flex gap-2 buttonBox justify-center items-center px-6 py-4 mt-12 text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
       <span className="self-stretch my-auto">INVEST NOW</span>
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/7cf06636130784b7197ad2964ae6cd05eefafc3b7b675ca5cbda89fa888663b9?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde" className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" alt="" />
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/7cf06636130784b7197ad2964ae6cd05eefafc3b7b675ca5cbda89fa888663b9?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde"
+        className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
+        alt=""
+      />
     </button>
   );
 }
@@ -48,19 +58,22 @@ function ProjectPlanning() {
   ];
 
   return (
-    <main className="flex flex-col py-20 font-medium px-4 max-w-full md:max-w-[843px] ml-auto">
-      <section className="flex flex-col w-full max-md:max-w-full">
-        <SectionTitle>Project planning :</SectionTitle>
-        <ul className="flex flex-col mt-10 w-full text-xl leading-loose text-neutral-500 max-md:max-w-full">
+    <main className="flex flex-col mt-5 py-20 px-4 max-w-full md:max-w-[843px] ml-auto">
+      {/* Project Planning Section */}
+      <section className="flex flex-col w-full">
+        <SectionTitle>Project Planning :</SectionTitle>
+        <ul className="flex flex-col mt-10 w-full text-xl leading-loose text-neutral-500">
           {projectPlanningItems.map((item, index) => (
             <ListItem key={index} title={item.title} description={item.description} />
           ))}
         </ul>
         <InvestButton />
       </section>
-      <section className="flex flex-col mt-24 w-full max-md:mt-10 max-md:max-w-full">
+
+      {/* Use of Financing Section */}
+      <section className="flex flex-col mt-24 w-full">
         <SectionTitle>Use of Financing :</SectionTitle>
-        <ul className="flex flex-col mt-10 w-full text-xl leading-10 max-md:max-w-full">
+        <ul className="flex flex-col mt-10 w-full text-xl leading-10">
           {useOfFinancingItems.map((item, index) => (
             <ListItem key={index} title={item.title} description={item.description} />
           ))}
