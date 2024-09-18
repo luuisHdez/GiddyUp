@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Carousel, initTWE } from "tw-elements";
+import '../../assets/ButtonStyles.css'
 import Carrousel1 from './Carrousel1';
 import Carrousel2 from './Carrousel2';
 import Carrousel3 from './Carrousel3';
@@ -15,7 +16,7 @@ export function MainCarrousel() {
       id="carouselDarkVariant"
       className="relative"
       data-twe-carousel-init
-      data-twe-ride="carousel"
+      data-twe-ride="carousel carousel-container"
       data-twe-interval="2000"
     >
       {/* Indicadores del carrusel */}
@@ -59,7 +60,7 @@ export function MainCarrousel() {
           data-twe-carousel-item
           data-twe-carousel-active
         >
-          <div className="block w-full">
+          <div className="carousel-item">
             <Carrousel />
           </div>
         </div>
@@ -69,7 +70,7 @@ export function MainCarrousel() {
           data-twe-carousel-fade
           data-twe-carousel-item
         >
-          <div className="block w-full">
+          <div className="carousel-item">
             <Carrousel1 />
           </div>
         </div>
@@ -79,7 +80,7 @@ export function MainCarrousel() {
           data-twe-carousel-fade
           data-twe-carousel-item
         >
-          <div className="block w-full">
+          <div className="carousel-item">
             <Carrousel2 />
           </div>
         </div>
@@ -89,7 +90,7 @@ export function MainCarrousel() {
           data-twe-carousel-fade
           data-twe-carousel-item
         >
-          <div className="block w-full">
+          <div className="carousel-item">
             <Carrousel3 />
           </div>
         </div>

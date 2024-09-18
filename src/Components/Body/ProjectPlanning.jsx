@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function SectionTitle({ children }) {
   return (
@@ -27,9 +28,11 @@ function ListItem({ title, description }) {
 }
 
 function InvestButton() {
+  const { t } = useTranslation(); // Hook para las traducciones
+
   return (
     <button id="fifth" className="flex gap-2 buttonBox justify-center items-center px-6 py-4 mt-12 text-xl font-medium text-white bg-[linear-gradient(42deg,#006BD1_38.34%,#3EA1FF_81.44%)] min-h-[56px] rounded-[100px] w-[219px] max-md:px-5 max-md:mt-10">
-      <span className="self-stretch my-auto">INVEST NOW</span>
+      <span className="self-stretch my-auto">{t('investButtonText')}</span> {/* Traducción dinámica */}
       <img
         loading="lazy"
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/7cf06636130784b7197ad2964ae6cd05eefafc3b7b675ca5cbda89fa888663b9?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde"
@@ -41,27 +44,29 @@ function InvestButton() {
 }
 
 function ProjectPlanning() {
+  const { t } = useTranslation(); // Hook para las traducciones
+
   const projectPlanningItems = [
-    { title: 'Research and Design', description: 'Definition of key functionalities and interface design.' },
-    { title: 'Initial Development', description: 'Building the application with essential functions.' },
-    { title: 'Testing and Improvements', description: 'Refinement based on alpha and beta testing.' },
-    { title: 'Launch and Marketing', description: 'Strategies for launch and promotion in application stores.' }
+    { title: t('projectPlanning.researchAndDesign.title'), description: t('projectPlanning.researchAndDesign.description') },
+    { title: t('projectPlanning.initialDevelopment.title'), description: t('projectPlanning.initialDevelopment.description') },
+    { title: t('projectPlanning.testingAndImprovements.title'), description: t('projectPlanning.testingAndImprovements.description') },
+    { title: t('projectPlanning.launchAndMarketing.title'), description: t('projectPlanning.launchAndMarketing.description') }
   ];
 
   const useOfFinancingItems = [
-    { title: 'Technological Development', description: 'Hiring of developers and acquisition of infrastructure.' },
-    { title: 'Marketing and Advertising', description: 'Campaigns to increase visibility and attract users.' },
-    { title: 'Operations and Personnel', description: 'Compensation for equipment and operating expenses.' },
-    { title: 'Licenses and Content', description: 'Strategies for launch and promotion in application stores.' },
-    { title: 'Transparency and Communication', description: 'We will keep our backers informed with regular updates through newsletters, social media and our project blog.' },
-    { title: 'Support the Development of Giddy Up', description: 'Join our crowdfunding campaign to make this innovative application a reality. Your contribution will be essential to transform the management of daily activities.' }
+    { title: t('useOfFinancing.technologicalDevelopment.title'), description: t('useOfFinancing.technologicalDevelopment.description') },
+    { title: t('useOfFinancing.marketingAndAdvertising.title'), description: t('useOfFinancing.marketingAndAdvertising.description') },
+    { title: t('useOfFinancing.operationsAndPersonnel.title'), description: t('useOfFinancing.operationsAndPersonnel.description') },
+    { title: t('useOfFinancing.licensesAndContent.title'), description: t('useOfFinancing.licensesAndContent.description') },
+    { title: t('useOfFinancing.transparencyAndCommunication.title'), description: t('useOfFinancing.transparencyAndCommunication.description') },
+    { title: t('useOfFinancing.SupportDevelopment.title'), description: t('useOfFinancing.SupportDevelopment.description') }
   ];
 
   return (
     <main className="flex flex-col mt-5 py-20 px-4 max-w-full md:max-w-[843px] ml-auto">
       {/* Project Planning Section */}
       <section className="flex flex-col w-full">
-        <SectionTitle>Project Planning :</SectionTitle>
+        <SectionTitle>{t('projectPlanningTitle')}</SectionTitle> {/* Título traducido */}
         <ul className="flex flex-col mt-10 w-full text-xl leading-loose text-neutral-500">
           {projectPlanningItems.map((item, index) => (
             <ListItem key={index} title={item.title} description={item.description} />
@@ -72,7 +77,7 @@ function ProjectPlanning() {
 
       {/* Use of Financing Section */}
       <section className="flex flex-col mt-24 w-full">
-        <SectionTitle>Use of Financing :</SectionTitle>
+        <SectionTitle>{t('useOfFinancingTitle')}</SectionTitle> {/* Título traducido */}
         <ul className="flex flex-col mt-10 w-full text-xl leading-10">
           {useOfFinancingItems.map((item, index) => (
             <ListItem key={index} title={item.title} description={item.description} />

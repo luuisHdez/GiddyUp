@@ -1,8 +1,10 @@
 import * as React from "react";
 import carouselItems from './carrouselItems';
+import { useTranslation } from 'react-i18next';
 
 function Carrousel3() {
-  const { content: planstl } = carouselItems.find(item => item.title === "Long Terms Plans");
+  
+  const { t } = useTranslation();
   return (
     <section className="px-3 pt-14 w-full rounded-[50px] bg-blue-500 max-md:pr-5 max-md:max-w-full">
       <div className="flex gap-5 max-md:flex-col">
@@ -15,20 +17,42 @@ function Carrousel3() {
                     Longs <span className="text-white">Terms Planstl</span>
                   </h2>
                   <div className="flex flex-col items-start mt-10 w-full text-xl leading-10 text-zinc-100 max-md:w-full">
-  {planstl.map((goal, index) => (
-    <div key={index} className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
-      <img loading="lazy" src={goal.icon} alt="" className="object-contain shrink-0 w-8 aspect-square" />
-      <div className="flex-auto max-md:w-full">
-        <span className="font-medium underline text-zinc-300">{goal.title}</span>
-        <span className="font-medium text-zinc-300">:</span>{" "}
-        <span className="font-medium text-white">{goal.description}</span>
-      </div>
-    </div>
-  ))}
-</div>
+                  <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                      <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                      <div className="flex-auto max-md:w-full">
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.3.content.0.title')}</span>
+                        <span className="font-medium text-zinc-300">:</span>{" "}
+                        <span className="font-medium text-white">{t('carouselItems.3.content.0.description')}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                      <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                      <div className="flex-auto max-md:w-full">
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.3.content.1.title')}</span>
+                        <span className="font-medium text-zinc-300">:</span>{" "}
+                        <span className="font-medium text-white">{t('carouselItems.3.content.1.description')}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                    <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                      <div className="flex-auto max-md:w-full">
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.3.content.2.title')}</span>
+                        <span className="font-medium text-zinc-300">:</span>{" "}
+                        <span className="font-medium text-white">{t('carouselItems.3.content.2.description')}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                    <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                      <div className="flex-auto max-md:w-full">
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.3.content.3.title')}</span>
+                        <span className="font-medium text-zinc-300">:</span>{" "}
+                        <span className="font-medium text-white">{t('carouselItems.3.content.3.description')}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <button id="fifth" className="flex gap-2 buttonBox justify-center items-center self-start px-6 py-4 mt-24 text-xl font-medium bg-white min-h-[56px] rounded-[100px] text-neutral-700 max-md:px-5 max-md:mt-10">
-                  <span className=" self-stretch my-auto">INVEST NOW</span>
+                <span className="self-stretch my-auto">{t('investNow')}</span>
                   <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6e6a24967a3613cb128c41a54ffc8452504fda6940fd5e2da17fa31f993e4867?apiKey=c1946530cef5422ab7dda9568063bfde&&apiKey=c1946530cef5422ab7dda9568063bfde" alt="" className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
                 </button>
               </div>

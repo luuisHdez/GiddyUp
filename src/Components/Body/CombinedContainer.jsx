@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from "react";
-import surveyData from "../surveyData"; // Asegúrate de que el JSON esté correctamente importado
-import { getLambda } from "../../lambda-api";
+import { useTranslation } from "react-i18next";
+import { getLambda } from "../../lambda-api"; // Para enviar datos
 
 function CombinedContainer({ closeModal }) {
+  const { t, i18n } = useTranslation();  // Hook para la traducción
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [answers, setAnswers] = useState(() => {
-    // Cargar respuestas guardadas en localStorage al iniciar
     const savedAnswers = localStorage.getItem("surveyAnswers");
     return savedAnswers ? JSON.parse(savedAnswers) : {};
   });
 
-  // Guardar las respuestas en localStorage cada vez que se actualicen
+  // Almacenar respuestas en localStorage cada vez que cambien
   useEffect(() => {
     localStorage.setItem("surveyAnswers", JSON.stringify(answers));
   }, [answers]);
 
-  // Verificar que surveyData tenga la estructura correcta
-  if (!surveyData || !surveyData[0]?.pages) {
-    return <div>Error: No se encontraron los datos del cuestionario.</div>;
+  // Obtener datos de la encuesta desde i18n.js
+  const surveyData = t('surveyData', { returnObjects: true });
+
+  if (!surveyData || !surveyData.pages) {
+    return <div>{t("Error: No se encontraron los datos del cuestionario.")}</div>;
   }
 
-  const currentPage = surveyData[0].pages[currentPageIndex];
+  const currentPage = surveyData.pages[currentPageIndex];
 
+  // Almacenar respuestas en su idioma original
   const handleOptionChange = (questionName, value) => {
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
@@ -29,27 +32,24 @@ function CombinedContainer({ closeModal }) {
     }));
   };
 
-  const handleCheckboxChange = (questionName, value) => {
-    setAnswers((prevAnswers) => {
-      const currentValues = prevAnswers[questionName] || [];
-      return {
-        ...prevAnswers,
-        [questionName]: currentValues.includes(value)
-          ? currentValues.filter((v) => v !== value)
-          : [...currentValues, value],
-      };
-    });
+  const handleNextPage = () => {
+    if (validatePage()) {
+      setCurrentPageIndex((prevIndex) =>
+        prevIndex < surveyData.pages.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    } else {
+      alert(t("Por favor, responde todas las preguntas antes de continuar."));
+    }
   };
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const handlePreviousPage = () => {
+    setCurrentPageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
   };
 
   const validatePage = () => {
     const unansweredQuestions = currentPage.elements.filter((element) => {
       if (element.name === "correo_electronico" && !validateEmail(answers[element.name])) {
-        alert(`Por favor, ingresa una dirección de correo válida.`);
+        alert(t("Por favor, ingresa una dirección de correo válida."));
         return true;
       }
       if (element.type === "radiogroup" || element.type === "text" || element.type === "comment") {
@@ -63,64 +63,64 @@ function CombinedContainer({ closeModal }) {
     return unansweredQuestions.length === 0;
   };
 
-  const handleNextPage = () => {
-    if (validatePage()) {
-      setCurrentPageIndex((prevIndex) =>
-        prevIndex < surveyData[0].pages.length - 1 ? prevIndex + 1 : prevIndex
-      );
-    } else {
-      alert("Por favor, responde todas las preguntas antes de continuar.");
-    }
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
-  const handlePreviousPage = () => {
-    setCurrentPageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+  // Traducir todas las respuestas al español antes de almacenarlas
+  const translateAnswersToSpanish = () => {
+    const translatedAnswers = {};
+    Object.keys(answers).forEach((key) => {
+      translatedAnswers[key] = i18n.language === "en" ? t(answers[key], { lng: "es" }) : answers[key];
+    });
+    return translatedAnswers;
   };
 
   const handleFinish = async () => {
     if (!validatePage()) {
-      alert("Por favor, responde todas las preguntas antes de finalizar.");
+      alert(t("Por favor, responde todas las preguntas antes de finalizar."));
       return;
     }
-  
-    // Crear el objeto dataToSend con el id como clave
-    const dataToSend = Object.keys(answers).reduce((acc, key) => {
-      const question = surveyData[0].pages
+
+    // Traducir todas las respuestas a español antes de almacenarlas
+    const translatedAnswers = translateAnswersToSpanish();
+
+    const dataToSend = Object.keys(translatedAnswers).reduce((acc, key) => {
+      const question = surveyData.pages
         .flatMap((page) => page.elements)
         .find((element) => element.name === key);
-      
-      const selectedText = question?.choices?.find((choice) => choice.value === answers[key])?.text;
-      
+
+      const selectedText = question?.choices?.find((choice) => choice.value === translatedAnswers[key])?.text;
+
       if (question?.id) {
         acc[question.id] = {
-          answer: answers[key],
-          text: selectedText || answers[key],
-          type: question.type, // Agregando el tipo de pregunta
-          title: question.title, // Usando "title" en lugar de "name"
+          answer: translatedAnswers[key],
+          text: selectedText || translatedAnswers[key],
+          type: question.type,
+          title: question.title,
         };
       }
-      
+
       return acc;
     }, {});
-  
-    console.log("resss",dataToSend);
-  
+
+    console.log("Datos a enviar:", dataToSend);
+
     try {
       const response = await getLambda(dataToSend);
       console.log("Respuesta de Lambda:", response);
+      localStorage.removeItem("surveyAnswers");
     } catch (error) {
       console.error("Error al llamar a la API:", error);
     }
-  
-    //localStorage.removeItem("surveyAnswers");
-  
+
     if (closeModal) {
       closeModal();
     }
-  
-    alert("Encuesta finalizada. ¡Gracias por participar!");
+    
+    alert(t("Encuesta finalizada. ¡Gracias por participar!"));
   };
-  
 
   const getInputValue = (name) => {
     return answers[name] !== undefined ? answers[name] : "";
@@ -128,13 +128,11 @@ function CombinedContainer({ closeModal }) {
 
   return (
     <div className="space-y-6 p-4 overflow-auto">
-      {/* Mostrar el título de la página actual */}
-      <h2 className="text-lg font-semibold text-center">{currentPage.name}</h2>
+      <h2 className="text-lg font-semibold text-center">{t(currentPage.name)}</h2>
 
-      {/* Renderizar las preguntas y sus opciones */}
       {currentPage.elements.map((element, i) => (
         <div key={i} className="space-y-2">
-          <p className="font-medium">{element.title}</p>
+          <p className="font-medium">{t(element.title)}</p>
 
           {/* Radiogroup */}
           {element.type === "radiogroup" && (
@@ -151,7 +149,7 @@ function CombinedContainer({ closeModal }) {
                     className="mr-2"
                   />
                   <label htmlFor={`question-${element.name}-choice-${index}`}>
-                    {choice.text}
+                    {t(choice.text)} {/* Mostrar la opción en el idioma seleccionado */}
                   </label>
                 </div>
               ))}
@@ -166,7 +164,7 @@ function CombinedContainer({ closeModal }) {
               value={getInputValue(element.name)}
               onChange={(e) => handleOptionChange(element.name, e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
-              placeholder="Escribe tu respuesta aquí"
+              placeholder={t("Escribe tu respuesta aquí")}
             />
           )}
 
@@ -177,7 +175,7 @@ function CombinedContainer({ closeModal }) {
               value={getInputValue(element.name)}
               onChange={(e) => handleOptionChange(element.name, e.target.value)}
               className="w-full p-2 border border-gray-300 rounded"
-              placeholder="Escribe tu comentario aquí"
+              placeholder={t("Escribe tu comentario aquí")}
             />
           )}
         </div>
@@ -190,21 +188,15 @@ function CombinedContainer({ closeModal }) {
           disabled={currentPageIndex === 0}
           className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
         >
-          Anterior
+          {t("Anterior")}
         </button>
-        {currentPageIndex === surveyData[0].pages.length - 1 ? (
-          <button
-            onClick={handleFinish}
-            className="px-4 py-2 bg-green-500 text-white rounded"
-          >
-            Finalizar
+        {currentPageIndex === surveyData.pages.length - 1 ? (
+          <button onClick={handleFinish} className="px-4 py-2 bg-green-500 text-white rounded">
+            {t("Finalizar")}
           </button>
         ) : (
-          <button
-            onClick={handleNextPage}
-            className="px-4 py-2 bg-blue-500 text-white rounded"
-          >
-            Siguiente
+          <button onClick={handleNextPage} className="px-4 py-2 bg-blue-500 text-white rounded">
+            {t("Siguiente")}
           </button>
         )}
       </div>

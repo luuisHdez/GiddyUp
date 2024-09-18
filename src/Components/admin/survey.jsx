@@ -16,6 +16,35 @@ function Survey() {
     }
   };
 
+  // Función para descargar el archivo Excel
+  const ecxel = async () => {
+    try {
+      const response = await getAllSurveys(true); // Enviar el parámetro excel=true
+      
+      // Decodificar el archivo Base64
+      const byteCharacter = atob(response); // Decodificar la respuesta que viene en Base64
+      const byteNumbers = new Array(byteCharacter.length);
+      for (let i = 0; i < byteCharacter.length; i++){
+        byteNumbers[i] = byteCharacter.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+
+      // Crear un Blob a partir de los datos decodificados
+      const blob = new Blob([byteArray], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = window.URL.createObjectURL(blob);
+
+      // Crear un enlace temporal para descargar el archivo
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'items.xlsx'); // Nombre del archivo
+      document.body.appendChild(link);
+      link.click();
+      link.remove(); // Remover el enlace después de la descarga
+    } catch (error) {
+      console.error("Error al descargar el archivo:", error);
+    }
+  };
+
   // Navegación entre encuestas
   const handleNextSurvey = () => {
     setCurrentSurveyIndex((prevIndex) =>
@@ -79,6 +108,11 @@ function Survey() {
           </div>
         )}
       </div>
+      <div className="flex justify-center mt-4">
+            <button onClick={ecxel} className="px-4 py-2 bg-gray-300 rounded">
+              Obtener Excel
+            </button>
+          </div>
     </div>
   );
 }

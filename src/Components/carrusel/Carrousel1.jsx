@@ -1,9 +1,9 @@
 import * as React from "react";
-import carouselItems from './carrouselItems';
+import { useTranslation } from 'react-i18next';  // Asegúrate de importar esto
 
 
 function Carrousel1() {
-  const { content: needs } = carouselItems.find(item => item.title === "Needs Addressed");
+  const { t } = useTranslation();
 
   return (
     <section className="px-3 pt-14 w-full rounded-[50px] bg-blue-500 max-md:pr-5 max-md:max-w-full">
@@ -14,29 +14,51 @@ function Carrousel1() {
               <div className="flex flex-col grow shrink-0 basis-0 w-fit max-md:w-full">
                 <div className="flex flex-col max-md:w-full">
                   <h2 className="text-6xl font-medium text-white max-md:max-w-full max-md:text-4xl">
-                    Needs <span className="text-white">Adressed</span>
+                    {t('Need')}
                   </h2>
                   <div className="flex flex-col items-start mt-10 w-full text-xl leading-10 text-zinc-100 max-md:w-full">
-                  {needs.map((goal, index) => (
-                    <div key={index} className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
-                      <img loading="lazy" src={goal.icon} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                  
+                  <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                      <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
                       <div className="flex-auto max-md:w-full">
-                        <span className="font-medium underline text-zinc-300">{goal.title}</span>
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.1.content.0.title')}</span>
                         <span className="font-medium text-zinc-300">:</span>{" "}
-                        <span className="font-medium text-white">{goal.description}</span>
+                        <span className="font-medium text-white">{t('carouselItems.1.content.0.description')}</span>
                       </div>
                     </div>
-                  ))}
+                    <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                      <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                      <div className="flex-auto max-md:w-full">
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.1.content.1.title')}</span>
+                        <span className="font-medium text-zinc-300">:</span>{" "}
+                        <span className="font-medium text-white">{t('carouselItems.1.content.1.description')}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                    <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                      <div className="flex-auto max-md:w-full">
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.1.content.2.title')}</span>
+                        <span className="font-medium text-zinc-300">:</span>{" "}
+                        <span className="font-medium text-white">{t('carouselItems.1.content.2.description')}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 mt-8 max-w-full w-[675px] max-md:w-full">
+                    <img loading="lazy" src={"https://cdn.builder.io/api/v1/image/assets/TEMP/42fec9c3bc40acd2b6bcc9eeed10f0ec520613981a6df7662db45320f1b15bcb?apiKey=c1946530cef5422ab7dda9568063bfde"} alt="" className="object-contain shrink-0 w-8 aspect-square" />
+                      <div className="flex-auto max-md:w-full">
+                        <span className="font-medium underline text-zinc-300">{t('carouselItems.1.content.3.title')}</span>
+                        <span className="font-medium text-zinc-300">:</span>{" "}
+                        <span className="font-medium text-white">{t('carouselItems.1.content.3.description')}</span>
+                      </div>
+                    </div>
                 </div>
                 </div>
                 <button id="fifth" className="flex gap-2 buttonBox justify-center items-center self-start px-6 py-4 mt-24 text-xl font-medium bg-white min-h-[56px] rounded-[100px] text-neutral-700 max-md:px-5 max-md:mt-10">
-                  <span className="self-stretch my-auto">INVEST NOW</span>
+                  <span className="self-stretch my-auto">{t('investNow')}</span>
                   <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/6e6a24967a3613cb128c41a54ffc8452504fda6940fd5e2da17fa31f993e4867?apiKey=c1946530cef5422ab7dda9568063bfde&&apiKey=c1946530cef5422ab7dda9568063bfde" alt="" className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square" />
                 </button>
               </div>
             </div>
             <div className="flex flex-col items-start px-9 mt-6 max-w-full rounded-full border-2 border-solid border-white border-opacity-30 w-[540px] max-md:pl-5 max-md:w-full">
-              
             </div>
           </div>
         </div>

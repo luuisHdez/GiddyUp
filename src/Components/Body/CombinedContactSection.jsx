@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next'; // Hook para las traducciones
 
 function CombinedContactSection() {
+  const { t } = useTranslation(); // Hook para acceder a las traducciones
+
   return (
     <section className="px-14 pt-9 w-full rounded-[30px] bg-blue-500 max-md:px-5 max-md:max-w-full">
       <div className="flex gap-5 max-md:flex-col">
@@ -8,10 +11,10 @@ function CombinedContactSection() {
           <div className="flex flex-col grow mt-7 max-md:mt-10 max-md:max-w-full">
             <header className="flex flex-col justify-center max-md:max-w-full">
               <h1 className="text-6xl text-white leading-[64px] max-md:max-w-full max-md:text-4xl max-md:leading-10">
-                You Have Questions?
+                {t('contactSection.questionsTitle')} {/* Título traducido */}
               </h1>
               <p className="mt-4 text-2xl leading-8 text-gray-200 max-md:max-w-full">
-                For scouting agents, this platform represents the shortest path you could have in order to find the
+                {t('contactSection.questionsDescription')} {/* Descripción traducida */}
               </p>
             </header>
             <img
@@ -28,22 +31,22 @@ function CombinedContactSection() {
               <div className="flex flex-wrap gap-4 w-full max-md:max-w-full">
                 <div className="flex flex-col flex-1 shrink self-start basis-0 min-w-[240px]">
                   <label>
-                    Your Name <span className="text-red-500">*</span>
+                    {t('contactSection.nameLabel')} <span className="text-red-500">*</span> {/* Etiqueta Nombre */}
                   </label>
                   <input
                     type="text"
-                    placeholder="First Name"
+                    placeholder={t('contactSection.namePlaceholder')}  
                     className="flex-1 shrink gap-2.5 self-stretch px-3 py-5 mt-2.5 w-full bg-white bg-opacity-20 rounded-[100px]"
                     required
                   />
                 </div>
                 <div className="flex flex-col flex-1 shrink self-start basis-0 min-w-[240px]">
                   <label>
-                    Email <span className="text-red-500">*</span>
+                    {t('contactSection.emailLabel')} <span className="text-red-500">*</span> {/* Etiqueta Email */}
                   </label>
                   <input
                     type="text"
-                    placeholder="Email address"
+                    placeholder={t('contactSection.emailPlaceholder')}  
                     className="flex-1 shrink gap-2.5 self-stretch px-3 py-5 mt-2.5 w-full bg-white bg-opacity-20 rounded-[100px]"
                     required
                   />
@@ -52,11 +55,11 @@ function CombinedContactSection() {
               <div className="flex gap-4 items-start mt-4 w-full max-md:max-w-full">
                 <div className="flex flex-col flex-1 shrink w-full basis-0 min-w-[240px] max-md:max-w-full">
                   <label>
-                    Message <span className="text-red-500">*</span>
+                    {t('contactSection.messageLabel')} <span className="text-red-500">*</span> 
                   </label>
                   <div className="relative mt-2.5 w-full">
                     <textarea
-                      placeholder="Write here..."
+                      placeholder={t('contactSection.messagePlaceholder')}  
                       required
                       className="flex gap-2.5 items-start px-3 pt-3.5 pb-40 w-full rounded-2xl bg-white bg-opacity-20 max-md:pb-24 max-md:max-w-full"
                     />
@@ -71,7 +74,7 @@ function CombinedContactSection() {
               </div>
             </div>
             <button className="flex justify-center items-center px-6 py-4 mt-10 max-w-full text-xl font-medium text-white bg-white bg-opacity-20 min-h-[56px] rounded-[100px]">
-              Send Message
+              {t('contactSection.sendButton')} {/* Botón traducido */}
             </button>
           </form>
         </div>
