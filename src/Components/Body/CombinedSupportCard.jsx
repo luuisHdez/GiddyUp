@@ -1,8 +1,8 @@
 import React from "react";
-import { useTranslation } from "react-i18next";  // Importa el hook para las traducciones
+import { useTranslation } from "react-i18next";
 
 function CombinedSupportCard() {
-  const { t } = useTranslation();  // Hook para las traducciones
+  const { t } = useTranslation();
 
   const supportData = [
     {

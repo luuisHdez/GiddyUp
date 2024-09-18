@@ -155,8 +155,6 @@ function CombinedContainer({ closeModal }) {
               ))}
             </div>
           )}
-
-          {/* Text Input */}
           {element.type === "text" && (
             <input
               type="text"
@@ -168,7 +166,6 @@ function CombinedContainer({ closeModal }) {
             />
           )}
 
-          {/* Comment Input */}
           {element.type === "comment" && (
             <textarea
               name={element.name}

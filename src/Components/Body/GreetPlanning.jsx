@@ -21,7 +21,6 @@ export function GreetPlanning() {
                       Our <span className="text-white">Goals</span>
                     </h2>
                     <div className="flex flex-col items-start mt-10 w-full text-xl leading-10 text-zinc-100 max-md:max-w-full">
-                      {/* Aquí puedes mapear tus objetivos */}
                       <div className="flex flex-wrap gap-4 mt-8 max-w-full w-[675px]">
                         <img
                           loading="lazy"
@@ -66,7 +65,6 @@ export function GreetPlanning() {
           </div>
         </div>
       </section>
-      {/* Puedes repetir la estructura anterior para las otras secciones del carrusel */}
     </Carousel>
   );
 }

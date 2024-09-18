@@ -44,7 +44,6 @@ function ActionButtons() {
             >
               &times;
             </button>
-            {/* Aquí se inserta el componente del formulario */}
             <CombinedContainer closeModal={toggleModal} />
           </div>
         </div>

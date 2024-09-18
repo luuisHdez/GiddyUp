@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next'; // Importamos el hook de traducc
 
 const missionVisionData = [
   {
-    titleKey: "missionTitle", // Clave para el título en i18n
-    contentKey: "missionContent", // Clave para el contenido en i18n
+    titleKey: "missionTitle", 
+    contentKey: "missionContent", 
     imageSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/21ac5b2ce47dda07db21dc716047fd59a28a86ec548653bf86fb3e5789a43b2c?apiKey=c1946530cef5422ab7dda9568063bfde&&apiKey=c1946530cef5422ab7dda9568063bfde",
     titleColor: "text-neutral-600"
   },
   {
-    titleKey: "visionTitle", // Clave para el título en i18n
-    contentKey: "visionContent", // Clave para el contenido en i18n
+    titleKey: "visionTitle", 
+    contentKey: "visionContent", 
     imageSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/f285fb044fd15de57ac07578f3475d6bdc94e75fd25fadf82aae786a85bdcb31?apiKey=c1946530cef5422ab7dda9568063bfde&&apiKey=c1946530cef5422ab7dda9568063bfde",
     titleColor: "text-sky-600"
   }

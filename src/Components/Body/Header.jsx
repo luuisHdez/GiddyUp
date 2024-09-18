@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Error from '../Modals/Error';
-import { useTranslation } from 'react-i18next';  // Asegúrate de importar esto
+import { useTranslation } from 'react-i18next';
 import '../../assets/ButtonStyles.css';
 
 function Header() {
@@ -22,7 +22,7 @@ function Header() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);  // Cerrar el dropdown si haces clic fuera de él
+        setIsDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -51,12 +51,12 @@ function Header() {
           >
             {/* Imagen del idioma actual */}
             <div className="flex items-center gap-2">
-  <svg
-    aria-hidden="true"
-    className="object-contain w-[22px] rounded-full max-md:w-[18px]" // Mantén las clases de estilo
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
-  >
+            <svg
+              aria-hidden="true"
+              className="object-contain w-[22px] rounded-full max-md:w-[18px]" // Mantén las clases de estilo
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
     {i18n.language === 'en' ? (
       // SVG para la bandera de Estados Unidos
       <g fillRule="evenodd">
@@ -122,7 +122,7 @@ function Header() {
           onClick={toggleModal}
           className="flex items-center justify-center gap-2.5 px-6 py-3 text-xl font-medium bg-white rounded-full text-neutral-700 min-h-[56px] max-md:px-4 max-md:py-2 max-md:text-sm buttonBox"
         >
-          {t('invest')}  {/* Texto traducido desde JSON */}
+          {t('invest')}  
         </button>
       </div>
 

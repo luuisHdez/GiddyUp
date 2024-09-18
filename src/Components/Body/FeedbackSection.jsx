@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next'; // Importar el hook de traducción
+import { useTranslation } from 'react-i18next';
 
 const feedbackIcons = [
   "https://cdn.builder.io/api/v1/image/assets/TEMP/e5eba08426d551374c6836fa85f5d52cdfa8e89f8ca62f263a413a389640c705?placeholderIfAbsent=true&apiKey=c1946530cef5422ab7dda9568063bfde",
