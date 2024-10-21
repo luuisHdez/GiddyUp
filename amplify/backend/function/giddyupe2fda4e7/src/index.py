@@ -4,7 +4,7 @@ import uuid
 import openpyxl
 from openpyxl import Workbook
 from io import BytesIO
-import base64
+import base64 
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('encuesta')
