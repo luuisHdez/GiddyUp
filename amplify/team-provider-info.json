@@ -1,31 +1,25 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-giddyup-dev-e2260-authRole",
-      "UnauthRoleArn": "arn:aws:iam::211125723129:role/amplify-giddyup-dev-e2260-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::211125723129:role/amplify-giddyup-dev-e2260-authRole",
+      "AuthRoleName": "amplify-giddyup-dev-3556c-authRole",
+      "UnauthRoleArn": "arn:aws:iam::211125723129:role/amplify-giddyup-dev-3556c-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::211125723129:role/amplify-giddyup-dev-3556c-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-giddyup-dev-e2260-deployment",
-      "UnauthRoleName": "amplify-giddyup-dev-e2260-unauthRole",
-      "StackName": "amplify-giddyup-dev-e2260",
-      "StackId": "arn:aws:cloudformation:us-east-1:211125723129:stack/amplify-giddyup-dev-e2260/f3b37400-6583-11ef-965c-0ece5c284e67",
-      "AmplifyAppId": "d6lxz6ufu9nw"
+      "DeploymentBucketName": "amplify-giddyup-dev-3556c-deployment",
+      "UnauthRoleName": "amplify-giddyup-dev-3556c-unauthRole",
+      "StackName": "amplify-giddyup-dev-3556c",
+      "StackId": "arn:aws:cloudformation:us-east-1:211125723129:stack/amplify-giddyup-dev-3556c/e2ecfb80-90a5-11ef-ab6e-0affccb80b57",
+      "AmplifyAppId": "d3a3nrsger5oz2"
     },
     "categories": {
       "function": {
-        "giddyupe2fda4e7": {
-          "deploymentBucketName": "amplify-giddyup-dev-e2260-deployment",
-          "s3Key": "amplify-builds/giddyupe2fda4e7-57416b594373456a754f-build.zip"
-        }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d6lxz6ufu9nw",
-          "type": "cicd"
+        "giddyLambdaF": {
+          "deploymentBucketName": "amplify-giddyup-dev-3556c-deployment",
+          "s3Key": "amplify-builds/giddyLambdaF-5634474b4873564b4d30-build.zip"
         }
       },
       "api": {
-        "apic12f9eda": {}
+        "api282b4b74": {}
       }
     }
   }

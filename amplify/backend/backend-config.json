@@ -1,6 +1,6 @@
 {
   "api": {
-    "apic12f9eda": {
+    "api282b4b74": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "giddyupe2fda4e7"
+          "resourceName": "giddyLambdaF"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -16,49 +16,26 @@
     }
   },
   "function": {
-    "giddyupe2fda4e7": {
+    "giddyLambdaF": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
-  "hosting": {
-    "amplifyhosting": {
-      "lastPushTimeStamp": "2024-08-28T22:04:58.646Z",
-      "service": "amplifyhosting",
-      "type": "cicd"
-    }
-  },
   "parameters": {
-    "AMPLIFY_function_giddyupe2fda4e7_deploymentBucketName": {
+    "AMPLIFY_function_giddyLambdaF_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "giddyupe2fda4e7"
+          "resourceName": "giddyLambdaF"
         }
       ]
     },
-    "AMPLIFY_function_giddyupe2fda4e7_s3Key": {
+    "AMPLIFY_function_giddyLambdaF_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "giddyupe2fda4e7"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_appId": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_type": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
+          "resourceName": "giddyLambdaF"
         }
       ]
     }

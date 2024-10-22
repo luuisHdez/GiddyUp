@@ -21,7 +21,7 @@ backend:
     preBuild:
       commands:
         - pip install --upgrade pip
-        - pip install -r amplify/backend/function/giddyupe2fda4e7/src/requirements.txt
+        - pip install -r amplify/backend/function/giddyLambdaF/src/requirements.txt
     build:
       commands:
         - echo "No build step required for Lambda"
